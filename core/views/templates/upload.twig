@@ -10,14 +10,14 @@
     {% if error %}
         <div class="alert alert-error">{{ error }}</div>
     {% endif %}
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <div>
-            <label for="file">Выберите файл (макс. {{ max_file_size / 1024 / 1024 }} MB):</label>
-            <label for="file">Типы файлов для загрузки ({{ allowed_types }}):</label>
-            <input type="file" name="file" id="file" required>
+    <form action="/upload" method="post" enctype="multipart/form-data" class="form-control">
+        <div class="card-header">
+            <label   for="file">Выберите файл (макс. {{ max_file_size / 1024 / 1024 }} MB):</label>
+            <label   for="file">Типы файлов для загрузки ({%  for at in allowed_types %}{{ at }} {% endfor %}):</label>
+            <input   type="file" name="file" id="file" required>
         </div>
 
-        <div>
+        <div class="card-body">
             <label for="description">Описание (необязательно):</label>
             <textarea name="description" id="description" rows="3"></textarea>
         </div>
@@ -25,34 +25,6 @@
         <button type="submit">Загрузить</button>
     </form>
 
-    <div class="file-list">
-        <h2>Ваши файлы</h2>
-
-        {% if files %}
-            {% for file in files %}
-                <div class="file-item">
-                    <div class="file-info">
-                        <div>
-                            <strong>{{ file.original_name }}</strong>
-                            <span>({{ (file.file_size / 1024)|round(2) }} KB)</span>
-                        </div>
-                        <div>{{ file.upload_date|date('d.m.Y H:i') }}</div>
-                    </div>
-
-                    {% if file.description %}
-                        <p>{{ file.description }}</p>
-                    {% endif %}
-
-                    <div class="file-actions">
-                        <a href="uploads/{{ file.stored_name }}" download>Скачать</a>
-                        <a href="delete.php?id={{ file.id }}" onclick="return confirm('Удалить файл?')">Удалить</a>
-                    </div>
-                </div>
-            {% endfor %}
-        {% else %}
-            <p>Нет загруженных файлов</p>
-        {% endif %}
-    </div>
 </div>
 
 {% endblock %}
