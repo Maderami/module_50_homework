@@ -1,0 +1,52 @@
+{% extends "{{ __DIR__ }}/../layout.twig" %}
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card mt-5">
+                    <div class="card-header">
+                        <h3 class="text-center">Регистрация</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="registerForm" novalidate>
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Имя пользователя</label>
+                                <input type="text" class="form-control" id="username" name="username"
+                                       data-validate="required|min:3" autocomplete="username">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email"
+                                       data-validate="required|email" autocomplete="email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Пароль</label>
+                                <input type="password" class="form-control" id="password" name="password"
+                                       data-validate="required|min:8" autocomplete="new-password">
+                            </div>
+                            <div class="mb-3">
+                                <label for="confirm_password" class="form-label">Подтвердите пароль</label>
+                                <input type="password" class="form-control" id="confirm_password"
+                                       name="confirm_password" data-validate="required|match:password"
+                                       autocomplete="new-password">
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                            </div>
+                        </form>
+                        <div class="mt-3 text-center">
+                            <p>Уже есть аккаунт? <a href="/login">Войдите</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="/public/assets/js/form-validator.js"></script>
+    <script src="/public/assets/js/script.js"></script>
+{% endblock %}

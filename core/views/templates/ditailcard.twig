@@ -1,0 +1,50 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8">
+            <img src="/public/uploads/{{ image.filename }}" class="img-fluid" alt="{{ image.original_name }}">
+        </div>
+        <div class="col-md-4">
+            <h2>{{ image.original_name }}</h2>
+            <p>{{ image.description }}</p>
+            <p><small class="text-muted">Опубликовано: {{ username }}</small></p>
+
+            {% if sessionID == 'true' and image.user_id == currentUserId %}
+                <form action="/image/img_id={{ image.id }}/delete" method="POST" class="mb-4">
+                    <button type="submit" class="btn btn-danger">Удалить изображение</button>
+                </form>
+            {% endif %}
+
+            <h3 class="mt-4">Comments</h3>
+
+            {% if sessionID %}
+                <form action="/image/img_id={{ image.id }}/comment" method="POST" class="mb-4">
+                    <div class="mb-3">
+                        <textarea name="text" class="form-control" placeholder="Ваш комментарий..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Отправить</button>
+                </form>
+            {% endif %}
+
+            <div class="comments">
+                {% for comment in comments %}
+                    <div class="card mb-2">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ comment.username }}</h5>
+                            <p class="card-text">{{ comment.text }}</p>
+                            <p class="card-text"><small class="text-muted">{{ comment.created_at }}</small></p>
+                            {% if sessionID and comment.user_id == currentUserId %}
+                                <form action="/comment/cmm_id={{ comment.id }}/delete" method="POST" class="d-inline">
+                                    <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+                                </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% else %}
+                    <p>Сейчас нет комментариев к изображению.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

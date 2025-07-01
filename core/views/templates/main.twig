@@ -1,0 +1,24 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+    <h1 class="mb-4">Галерея изображений</h1>
+
+    {% if sessionID %}
+        <div class="mb-4">
+            <a href="/upload" class="btn btn-primary">Загрузить изображение</a>
+        </div>
+    {% endif %}
+
+    <div class="row">
+        {% for image in images %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="/public/uploads/{{ image.filename }}" class="card-img-top" alt="Image">
+                    <div class="card-body">
+                        <a href="/image/img_id={{ image.id }}" class="btn btn-sm btn-outline-primary">Просмотреть</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
