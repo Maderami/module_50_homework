@@ -74,7 +74,6 @@ class GalleryController
         $errorUpload = '';
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $file = $_FILES['file'];
             $description = $_POST['description'] ?? '';
             $imageId = $this->imageModel->upload(Session::get('user')['id'], $description);
             if ($imageId) {
