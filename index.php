@@ -1,20 +1,6 @@
 <?php
-require_once __DIR__ . '/core/lib/Autoloader.php';
 
-
-// Для пространства имен core
-Autoloader::addNamespace('Core', __DIR__ . '/core');
-Autoloader::addNamespace('Core\Lib', __DIR__ . '/core/lib');
-// Для пространства имен core\config
-Autoloader::addNamespace('Core\Configs', __DIR__ . '/core/configs');
-
-// Для пространства имен core\controllers
-Autoloader::addNamespace('Core\Controllers', __DIR__ . '/core/controllers');
-
-// Для пространства имен core\models
-Autoloader::addNamespace('Core\Models', __DIR__ . '/core/models');
-
-Autoloader::register();
+require __DIR__ . '/vendor/autoload.php';
 
 use Core\Configs\Config;
 use Core\Configs\DataBase;

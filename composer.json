@@ -1,0 +1,28 @@
+{
+  "name": "module_50_homework/core",
+  "description": "Пример сайта-визитки для модуля",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ярослав Стадник",
+      "email": "jastadnik@yandex.ru"
+    }
+  ],
+  "require": {
+    "php": "^8.0",
+    "ext-pdo": "*",
+    "twig/twig": "^3.21",
+    "ext-gd": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Core\\": "core/",
+      "Core\\Configs\\": "core/configs",
+      "Core\\Models\\": "core/models",
+      "Core\\Controllers\\": "core/controllers",
+      "Core\\Lib\\": "core/lib"
+
+    }
+  }
+}
